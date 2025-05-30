@@ -1,42 +1,79 @@
 # Pixisphere Backend
 
-Pixisphere Backend is a modular Node.js backend for an AI-powered photography service marketplace. It connects clients with verified photographers and studios across India while providing role-based access, smart lead distribution, and comprehensive administration tools.
+Pixisphere is a full-stack AI-powered photography service marketplace that connects clients with verified photographers and studios across India. This backend implementation provides a modular and role-based architecture to support various functionalities of the platform.
 
-## Features
+## Table of Contents
 
-- **Role-Based Authentication & Access Control**: JWT-based auth with roles (_client_, _partner_, _admin_)
-- **Multi-Role User Management**: Supports signup/login using email/password with OTP (mocked)
-- **Partner Onboarding & Verification Workflow**: Partners can submit personal details, service information, document metadata, and sample portfolios; admins can review and update their status (pending, verified, rejected)
-- **Inquiry / Lead Management**: Clients submit service inquiries; leads are matched and distributed to relevant partners
-- **Portfolio Management**: Partners can add/edit/delete portfolio entries with descriptions and ordering
-- **Admin Moderation & KPIs**: APIs for viewing high-level KPIs, moderating reviews, and managing categories/locations
-- **Relational & Non-Relational Data Storage**: MongoDB for non-relational data and PostgreSQL for relational modules
-- **Bonus Features** (optional): Rate Limiting, Logging Middleware, Swagger/OpenAPI documentation, Dockerized environment, and Jest tests
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Environment Variables](#environment-variables)
+- [API Endpoints](#api-endpoints)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Tech Stack
+## Technologies Used
 
-- **Backend**: Node.js, Express.js
-- **Database**: 
-  - MongoDB (via Mongoose)
-  - PostgreSQL (via pg)
-- **Authentication**: JWT
+- Node.js
+- Express.js
+- MongoDB
+- PostgreSQL
+- JWT for authentication
+- Docker (optional)
 
-## Folder Structure
+## Installation
 
-```plaintext
-pixisphere-backend/
-├── backend/
-│   ├── config/
-│   │   └── [db.js](http://_vscodecontentref_/0)
-│   ├── controllers/
-│   ├── middlewares/
-│   ├── models/
-│   ├── routes/
-│   ├── services/
-│   ├── utils/
-│   ├── app.js
-│   ├── server.js
-│   └── .env
-├── package.json
-└── README.md
-```
+1. Clone the repository:
+   ```
+   git clone https://github.com/Alok2580/pixishpere-Backend.git
+   cd pixisphere-backend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Set up your environment variables in the `.env` file. You can use the `.env.example` as a reference.
+
+4. Start the server:
+   ```
+   npm run start
+   ```
+
+## Environment Variables
+
+- `MONGODB_URI`: Connection string for MongoDB.
+- `POSTGRES_URI`: Connection string for PostgreSQL.
+- `JWT_SECRET`: Secret key for JWT signing.
+- `PORT`: Port number for the server (default is 5000).
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/signup`: Register a new user (client, partner, admin).
+- `POST /api/auth/login`: Login and return JWT.
+
+### Inquiry Management
+- `POST /api/inquiry`: Submit a new service inquiry.
+- `GET /api/partner/leads`: Fetch assigned leads for partners.
+
+### Partner Management
+- `POST /api/partner/portfolio`: Add a portfolio entry.
+- `GET /api/admin/verifications`: View pending partner verifications.
+- `PUT /api/admin/verify/:id`: Approve or reject partner verification.
+
+### Admin Operations
+- `GET /api/admin/stats`: Fetch high-level KPIs.
+
+## Usage
+
+After starting the server, you can use tools like Postman or curl to interact with the API endpoints. Make sure to include the JWT token in the Authorization header for protected routes.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
